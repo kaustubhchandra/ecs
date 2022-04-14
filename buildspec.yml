@@ -24,5 +24,7 @@ phases:
       - printf '[{"name":"fargatecontainer","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinations.json
       - cat imagedefinations.json
 artifacts:
-  files: imagedefinations.json
+  files:
+    - appspec.yml
+    - imagedefinations.json
 
