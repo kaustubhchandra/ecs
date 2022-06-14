@@ -1,19 +1,13 @@
-FROM centos
-
-MAINTAINER aksarav@middlewareinventory.com
-
-RUN mkdir /opt/tomcat/
-
-WORKDIR /opt/tomcat
-RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
-RUN tar xvfz apache*.tar.gz
-RUN mv apache-tomcat-8.5.40/* /opt/tomcat/.
-RUN yum -y install java
-RUN java -version
-
-WORKDIR /opt/tomcat/webapps
-RUN curl -O -L https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
-
-EXPOSE 8080
-
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+FROM nginx
+MAINTAINER sandippanchbhai08@gmail.com
+RUN apt update
+RUN apt install -y wget \
+  zip \
+ unzip
+RUN rm -rf /usr/share/nginx/html/*
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page258/beauty.zip /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html/
+RUN unzip beauty.zip
+RUN cp -rvf templatemo_519_beauty/* .
+RUN rm -rf templatemo_519_beauty beauty.zip
+#CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
